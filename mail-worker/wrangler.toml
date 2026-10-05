@@ -2,6 +2,7 @@ name = "webmail"
 main = "src/index.js"
 compatibility_date = "2025-06-04"
 keep_vars = true
+workers_dev = true
 
 [observability]
 enabled = true

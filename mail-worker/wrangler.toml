@@ -1,4 +1,4 @@
-name = "cloud-mail"
+name = "webmail"
 main = "src/index.js"
 compatibility_date = "2025-06-04"
 keep_vars = true
@@ -6,14 +6,18 @@ keep_vars = true
 [observability]
 enabled = true
 
-#[[d1_databases]]
-#binding = "db"			#d1数据库绑定名默认不可修改
-#database_name = ""		#d1数据库名字
-#database_id = ""		#d1数据库id
+[[routes]]
+pattern = "mail.yukino.bond"
+custom_domain = true
 
-#[[kv_namespaces]]
-#binding = "kv"			#kv绑定名默认不可修改
-#id = ""					#kv数据库id
+[[d1_databases]]
+binding = "db"
+database_name = "webmail"
+database_id = "0136f0c8-d767-4fee-89c6-b583c8fde948"
+
+[[kv_namespaces]]
+binding = "kv"
+id = "5c460cc5b30a4923b6041c4fa8c64d5d"
 
 #[[r2_buckets]]
 #binding = "r2"			#r2对象存储绑定名默认不可修改

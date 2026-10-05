@@ -1,21 +1,36 @@
 <template>
-  <div id="login-box" :style=" background ? 'background: var(--el-bg-color)' : ''" v-loading="oauthLoading" element-loading-text="登录中...">
-    <div id="background-wrap" v-if="!settingStore.settings.background">
-      <div class="x1 cloud"></div>
-      <div class="x2 cloud"></div>
-      <div class="x3 cloud"></div>
-      <div class="x4 cloud"></div>
-      <div class="x5 cloud"></div>
-    </div>
-    <div v-else :style="background"></div>
+  <div id="login-box" v-loading="oauthLoading" element-loading-text="登录中...">
+    <header class="mail-login-header">
+      <a class="mail-brand" href="https://yukino.bond/" aria-label="Yukino 主站">
+        <img src="/yukino-avatar.jpg" width="40" height="40" alt="" />
+        <span>Yukino<span class="brand-dot">.</span><small>MAIL</small></span>
+      </a>
+      <a class="mail-home-link" href="https://yukino.bond/">{{ $t('mailHome') }} <Icon icon="lucide:arrow-up-right" width="15" height="15" /></a>
+    </header>
+    <main class="mail-login-layout">
+      <section class="mail-intro" aria-labelledby="mail-intro-title">
+        <p class="mail-eyebrow"><span class="mail-status-dot"></span>A LITTLE SPACE FOR YOUR LETTERS</p>
+        <h1 id="mail-intro-title">{{ $t('mailHeroGreeting') }}<span>Yukino Mail<span class="brand-dot">.</span></span></h1>
+        <p class="mail-intro-tagline">{{ $t('mailHeroTagline') }}</p>
+        <p class="mail-intro-description">{{ $t('mailHeroDescription') }}</p>
+        <div class="mail-postcard" :class="{'has-custom-background': Boolean(background)}" :style="background" aria-hidden="true">
+          <span class="postcard-caption">YUKINO / PERSONAL MAIL</span>
+          <div class="postcard-orbit"></div><div class="postcard-sun"></div>
+          <div class="postcard-hill postcard-hill-back"></div><div class="postcard-hill postcard-hill-front"></div>
+          <div class="postcard-envelope"><Icon icon="lucide:mail" width="100" height="100" /></div>
+          <span class="postcard-note">{{ $t('mailPostcardNote') }}</span>
+          <span class="postcard-bottom">WRITE · SEND · CONNECT</span>
+        </div>
+      </section>
     <div class="form-wrapper">
       <div class="container">
-        <span class="form-title">{{ settingStore.settings.title }}</span>
+        <span class="mail-eyebrow">YOUR PERSONAL MAILBOX</span>
+        <h2 class="login-form-title">{{ show === 'login' ? $t('loginBtn') : $t('regBtn') }}<span class="login-form-subtitle"> / {{ show === 'login' ? 'Welcome back' : 'Hello there' }}</span></h2>
         <span class="form-desc" v-if="show === 'login'">{{ $t('loginTitle') }}</span>
         <span class="form-desc" v-else>{{ $t('regTitle') }}</span>
-        <div v-show="show === 'login'">
+        <form v-show="show === 'login'" @submit.prevent="submit">
           <el-input :class="!hideLoginDomain ? 'email-input' : ''" v-model="form.email"
-                    type="text" :placeholder="$t('emailAccount')" autocomplete="off">
+                    type="text" :placeholder="$t('emailAccount')" :aria-label="$t('emailAccount')" autocomplete="username">
             <template #append v-if="!hideLoginDomain">
               <div @click.stop="openSelect">
                 <el-select
@@ -39,18 +54,18 @@
               </div>
             </template>
           </el-input>
-          <el-input v-model="form.password" :placeholder="$t('password')" type="password" autocomplete="off">
+          <el-input v-model="form.password" :placeholder="$t('password')" :aria-label="$t('password')" type="password" autocomplete="current-password" show-password>
           </el-input>
-          <el-button class="btn" type="primary" @click="submit" :loading="loginLoading"
+          <el-button class="btn" type="primary" native-type="submit" :loading="loginLoading"
           >{{ $t('loginBtn') }}
           </el-button>
           <el-button class="btn" v-if="settingStore.settings.linuxdoSwitch"  style="margin-top: 10px"  @click="linuxDoLogin">
             <el-avatar src="/image/linuxdo.webp" :size="18" style="margin-right: 10px" />LinuxDo
           </el-button>
-        </div>
+        </form>
         <div v-show="show !== 'login'">
           <el-input :class="!hideLoginDomain ? 'email-input' : ''" v-model="registerForm.email" type="text" :placeholder="$t('emailAccount')"
-                    autocomplete="off">
+                    :aria-label="$t('emailAccount')" autocomplete="username">
             <template #append v-if="!hideLoginDomain">
               <div @click.stop="openSelect">
                 <el-select
@@ -74,9 +89,9 @@
               </div>
             </template>
           </el-input>
-          <el-input v-model="registerForm.password" :placeholder="$t('password')" type="password" autocomplete="off"/>
+          <el-input v-model="registerForm.password" :placeholder="$t('password')" :aria-label="$t('password')" type="password" autocomplete="new-password" show-password/>
           <el-input v-model="registerForm.confirmPassword" :placeholder="$t('confirmPwd')" type="password"
-                    autocomplete="off"/>
+                    :aria-label="$t('confirmPwd')" autocomplete="new-password"/>
           <el-input v-if="settingStore.settings.regKey === 0" v-model="registerForm.code" :placeholder="$t('regKey')"
                     type="text" autocomplete="off"/>
           <el-input v-if="settingStore.settings.regKey === 2" v-model="registerForm.code"
@@ -99,13 +114,15 @@
           </el-button>
         </div>
         <template v-if="settingStore.settings.register === 0">
-          <div class="switch" @click="show = 'register'" v-if="show === 'login'">{{ $t('noAccount') }}
-            <span>{{ $t('regSwitch') }}</span></div>
-          <div class="switch" @click="show = 'login'" v-else>{{ $t('hasAccount') }} <span>{{ $t('loginSwitch') }}</span>
+          <div class="switch" v-if="show === 'login'">{{ $t('noAccount') }}
+            <button type="button" @click="show = 'register'">{{ $t('regSwitch') }}</button></div>
+          <div class="switch" v-else>{{ $t('hasAccount') }} <button type="button" @click="show = 'login'">{{ $t('loginSwitch') }}</button>
           </div>
         </template>
       </div>
     </div>
+    </main>
+    <footer class="mail-login-footer"><span>© {{ new Date().getFullYear() }} Yukino</span><span>{{ $t('mailQuietNote') }}</span><a href="https://yukino.bond/changelog">{{ $t('mailChangelog') }} <Icon icon="lucide:arrow-up-right" width="12" height="12" /></a></footer>
     <el-dialog class="bind-dialog" v-model="showBindForm"  title="注册邮箱" >
       <div class="bind-container">
         <el-input :class="!hideLoginDomain ? 'email-input' : ''" v-model="bindForm.email" type="text" :placeholder="$t('emailAccount')" autocomplete="off">
@@ -141,7 +158,7 @@
       </div>
     </el-dialog>
     <a v-show="settingStore.settings.projectLink" class="github" href="https://github.com/maillab/cloud-mail">
-      <Icon icon="mingcute:github-line" color="#1890ff" width="20" height="20" />
+      <Icon icon="mingcute:github-line" width="20" height="20" />
     </a>
   </div>
 </template>
@@ -231,11 +248,6 @@ window.loadAfter = (e) => {
 window.loadBefore = (e) => {
   console.log('loadBefore')
 }
-
-const loginOpacity = computed(() => {
-  const opacity = settingStore.settings.loginOpacity
-  return uiStore.dark ? `rgba(0, 0, 0, ${opacity})` : `rgba(255, 255, 255, ${opacity})`
-})
 
 const hideLoginDomain = computed(() => settingStore.settings.loginDomain === 1)
 
@@ -424,7 +436,7 @@ function refreshWebsiteConfig() {
     if (!suffix.value && setting.domainList.length > 0) {
       suffix.value = setting.domainList[0]
     }
-    document.title = setting.title
+    document.title = 'Yukino Mail'
   }).catch(e => {
     console.error(e)
   })
@@ -591,252 +603,21 @@ function submitRegister() {
 </style>
 
 <style lang="scss" scoped>
-
-.form-wrapper {
-  position: fixed;
-  right: 0;
-  height: 100%;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @media (max-width: 767px) {
-    width: 100%;
-  }
-}
-
 .container {
-  background: v-bind(loginOpacity);
-  padding-left: 40px;
-  padding-right: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 450px;
-  height: 100%;
-  border-left: 1px solid var(--login-border);
-  box-shadow: var(--el-box-shadow-light);
-  @media (max-width: 1024px) {
-    padding: 20px 18px;
-    width: 384px;
-    margin-left: 18px;
-  }
-  @media (max-width: 767px) {
-    border: 1px solid var(--login-border);
-    padding: 20px 18px;
-    border-radius: 6px;
-    height: fit-content;
-    width: 100%;
-    margin-right: 18px;
-    margin-left: 18px;
-  }
-
-  .btn {
-    height: 36px;
-    width: 100%;
-    border-radius: 6px;
-  }
-
-  .form-desc {
-    margin-top: 5px;
-    margin-bottom: 18px;
-    color: var(--form-desc-color);
-  }
-
-  .form-title {
-    font-weight: bold;
-    font-size: 22px !important;
-  }
-
-  .switch {
-    margin-top: 20px;
-    text-align: center;
-
-    span {
-      color: var(--login-switch-color);
-      cursor: pointer;
-    }
-  }
-
-  :deep(.el-input__wrapper) {
-    border-radius: 6px;
-    background: var(--el-bg-color);
-  }
-
-  .email-input :deep(.el-input__wrapper) {
-    border-radius: 6px 0 0 6px;
-    background: var(--el-bg-color);
-  }
-
-  .el-input {
-    height: 38px;
-    width: 100%;
-    margin-bottom: 18px;
-
-    :deep(.el-input__inner) {
-      height: 36px;
-    }
-  }
+  .btn { width: 100%; border-radius: 7px; }
+  .el-input { width: 100%; }
+  :deep(.el-input__wrapper) { border-radius: 7px; background: var(--yukino-surface); }
+  .email-input :deep(.el-input__wrapper) { border-radius: 7px 0 0 7px; }
 }
-
-:deep(.el-select-dropdown__item) {
-  padding: 0 10px;
-}
-
-:deep(.bind-dialog) {
-  width: 400px !important;
-  @media (max-width: 440px) {
-    width: calc(100% - 40px) !important;
-    margin-right: 20px !important;
-    margin-left: 20px !important;
-  }
-}
-
-.bind-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-}
-
-.setting-icon {
-  position: relative;
-  top: 6px;
-}
-
-.github {
-  position: fixed;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: var(--el-bg-color);
-  bottom: 10px;
-  right: 10px;
-  z-index: 1000;
-  border: 1px solid var(--el-border-color-light);
-  box-shadow: var(--el-box-shadow-light);
-  cursor: pointer;
-}
-
-:deep(.el-input-group__append) {
-  padding: 0 !important;
-  padding-left: 8px !important;
-  padding-right: 4px !important;
-  background: var(--el-bg-color);
-  border-radius: 0 8px 8px 0;
-}
-
-:deep(.el-button+.el-button) {
-  margin: 0;
-}
-
-.register-turnstile {
-  margin-bottom: 18px;
-}
-
-.select {
-  position: absolute;
-  right: 30px;
-  width: 100px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.custom-style {
-  margin-bottom: 10px;
-}
-
-.custom-style .el-segmented {
-  --el-border-radius-base: 6px;
-  width: 180px;
-}
-
-
-#login-box {
-  background: linear-gradient(to bottom, #2980b9, #6dd5fa, #fff);
-  font: 100% Arial, sans-serif;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-
-#background-wrap {
-  height: 100%;
-  z-index: 0;
-}
-
-@keyframes animateCloud {
-  0% {
-    margin-left: -500px;
-  }
-
-  100% {
-    margin-left: 100%;
-  }
-}
-
-.x1 {
-  animation: animateCloud 30s linear infinite;
-  transform: scale(0.65);
-}
-
-.x2 {
-  animation: animateCloud 15s linear infinite;
-  transform: scale(0.3);
-}
-
-.x3 {
-  animation: animateCloud 25s linear infinite;
-  transform: scale(0.5);
-}
-
-.x4 {
-  animation: animateCloud 13s linear infinite;
-  transform: scale(0.4);
-}
-
-.x5 {
-  animation: animateCloud 20s linear infinite;
-  transform: scale(0.55);
-}
-
-.cloud {
-  background: linear-gradient(to bottom, #fff 5%, #f1f1f1 100%);
-  border-radius: 100px;
-  box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-  height: 120px;
-  width: 350px;
-  position: relative;
-}
-
-.cloud:after,
-.cloud:before {
-  content: "";
-  position: absolute;
-  background: #fff;
-  z-index: -1;
-}
-
-.cloud:after {
-  border-radius: 100px;
-  height: 100px;
-  left: 50px;
-  top: -50px;
-  width: 100px;
-}
-
-.cloud:before {
-  border-radius: 200px;
-  height: 180px;
-  width: 180px;
-  right: 50px;
-  top: -90px;
-}
-
+.bind-container { display: grid; gap: 15px; }
+:deep(.bind-dialog) { width: min(400px, calc(100% - 40px)) !important; }
+:deep(.el-select-dropdown__item) { padding: 0 10px; }
+:deep(.el-input-group__append) { padding: 0 4px 0 8px !important; background: var(--yukino-surface); border-radius: 0 7px 7px 0; }
+:deep(.el-button + .el-button) { margin-left: 0; }
+.setting-icon { position: relative; top: 6px; }
+.register-turnstile { margin-bottom: 18px; }
+.select { position: absolute; right: 30px; width: 100px; opacity: 0; pointer-events: none; }
+.github { position: fixed; bottom: 10px; right: 10px; z-index: 10; display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid var(--yukino-line); border-radius: 50%; background: var(--yukino-surface); color: var(--yukino-accent); }
 </style>

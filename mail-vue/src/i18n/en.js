@@ -336,7 +336,18 @@ const en = {
     searchUser: 'Search by user',
     searchEmail: 'Search by Email',
     searchSender: 'Search by Sender',
-    userEmail: 'Email Address'
+    userEmail: 'Email Address',
+    mailHome: 'Back to home',
+    mailQuietNote: 'Write a little. Grow a little.',
+    mailCompose: 'Compose',
+    mailLightMode: 'Switch to light mode',
+    mailDarkMode: 'Switch to dark mode',
+    mailNotice: 'View announcements',
+    mailHeroGreeting: 'A lovely place to meet.',
+    mailHeroTagline: 'Write a letter. Stay in touch.',
+    mailHeroDescription: 'A home for your letters and conversations worth keeping. Your own mailbox in this little digital garden.',
+    mailPostcardNote: 'A few words, a little connection.',
+    mailChangelog: 'What is new'
 }
 
 export default en

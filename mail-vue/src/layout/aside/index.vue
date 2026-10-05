@@ -1,11 +1,12 @@
 <template>
   <el-scrollbar class="scroll">
-    <div>
-      <div class="title" >
-        <Icon icon="mdi:email-outline" width="24" height="24" />
-        <div>{{settingStore.settings.title}}</div>
-      </div>
-      <el-menu :collapse="false" text-color="#fff" active-text-color="#fff" style="margin-top: 10px">
+    <div class="mail-sidebar">
+      <a class="mail-brand" href="https://yukino.bond/" aria-label="Yukino 主站">
+        <img src="/yukino-avatar.jpg" width="38" height="38" alt="" />
+        <span>Yukino<span class="brand-dot">.</span><small>MAIL</small></span>
+      </a>
+      <div class="mail-sidebar-caption">LETTERS & LITTLE THINGS</div>
+      <el-menu :collapse="false" text-color="var(--yukino-ink-soft)" active-text-color="var(--yukino-ink)" style="margin-top: 10px">
         <el-menu-item @click="router.push({name: 'email'})" index="email"
                       :class="route.meta.name === 'email' ? 'choose-item' : ''">
           <Icon icon="hugeicons:mailbox-01" width="20" height="20" />
@@ -65,6 +66,10 @@
           <span class="menu-name" style="margin-left: 22px">{{$t('SystemSettings')}}</span>
         </el-menu-item>
       </el-menu>
+      <div class="mail-sidebar-footer">
+        <a href="https://yukino.bond/">{{ $t('mailHome') }} <Icon icon="lucide:arrow-up-right" width="15" height="15" /></a>
+        <span>{{ $t('mailQuietNote') }}</span>
+      </div>
     </div>
   </el-scrollbar>
 </template>
@@ -73,9 +78,6 @@
 import router from "@/router/index.js";
 import { useRoute } from "vue-router";
 import {Icon} from "@iconify/vue";
-import {useSettingStore} from "@/store/setting.js";
-
-const settingStore = useSettingStore();
 const route = useRoute();
 
 </script>

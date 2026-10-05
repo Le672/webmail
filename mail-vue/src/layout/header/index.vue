@@ -4,21 +4,23 @@
       <hanburger @click="changeAside"></hanburger>
       <span class="breadcrumb-item">{{ $t(route.meta.title) }}</span>
     </div>
-    <div v-perm="'email:send'" class="writer-box" @click="openSend">
+    <button v-perm="'email:send'" class="writer-box" @click="openSend" :aria-label="$t('mailCompose')">
       <div class="writer">
         <Icon icon="material-symbols:edit-outline-sharp" width="22" height="22"/>
       </div>
-    </div>
+      <span class="compose-label">{{ $t('mailCompose') }}</span>
+    </button>
     <div class="toolbar">
-      <div v-if="uiStore.dark" class="sun-icon icon-item" @click="openDark($event)">
+      <a class="mail-home-link" href="https://yukino.bond/">{{ $t('mailHome') }} <Icon icon="lucide:arrow-up-right" width="14" height="14" /></a>
+      <button v-if="uiStore.dark" class="sun-icon icon-item" @click="openDark($event)" :aria-label="$t('mailLightMode')">
         <Icon icon="mingcute:sun-fill"/>
-      </div>
-      <div v-else class="dark-icon icon-item" @click="openDark($event)">
+      </button>
+      <button v-else class="dark-icon icon-item" @click="openDark($event)" :aria-label="$t('mailDarkMode')">
         <Icon icon="solar:moon-linear"/>
-      </div>
-      <div class="notice icon-item" @click="openNotice">
+      </button>
+      <button class="notice icon-item" @click="openNotice" :aria-label="$t('mailNotice')">
         <Icon icon="streamline-plump:announcement-megaphone"/>
-      </div>
+      </button>
       <el-dropdown ref="userinfoRef" @visible-change="e => userInfoShow = e" :teleported="false" popper-class="detail-dropdown">
         <div class="avatar" @click="userInfoHide" >
           <div class="avatar-text">
@@ -227,8 +229,7 @@ function openDark(e) {
 function switchDark(nextIsDark, root) {
   root.setAttribute('class', nextIsDark ? 'dark' : '')
   const metaTag = document.getElementById('theme-color-meta');
-  const isMobile =  !window.matchMedia("(pointer: fine) and (hover: hover)").matches;
-  metaTag.setAttribute('content', nextIsDark ? (isMobile ? '#141414' : '#000000') : (isMobile ? '#FFFFFF' : '#F1F1F1'));
+  metaTag.setAttribute('content', nextIsDark ? '#18251f' : '#f8f9f5');
   uiStore.dark = nextIsDark
 }
 
@@ -376,11 +377,11 @@ function formatName(email) {
   margin-left: 5px;
 
   .writer {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    color: #ffffff;
-    background: linear-gradient(135deg, #1890ff, #3a80dd);
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    color: inherit;
+    background: transparent;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -402,12 +403,14 @@ function formatName(email) {
 }
 
 .breadcrumb-item {
-  font-weight: bold;
-  font-size: 14px;
+  font-family: var(--yukino-serif);
+  font-weight: 500;
+  font-size: 22px;
   color: var(--el-text-color-primary);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  @media (max-width: 767px) { font-size: 20px; }
 }
 
 .toolbar {
@@ -452,14 +455,14 @@ function formatName(email) {
     cursor: pointer;
 
     .avatar-text {
-      background: var(--el-bg-color);
-      color: var(--el-text-color-primary);
+      background: var(--yukino-sage);
+      color: var(--yukino-accent);
       height: 30px;
       width: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 8px;
+      border-radius: 50%;
       border: 1px solid var(--dark-border);
     }
 

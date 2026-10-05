@@ -8,7 +8,7 @@ import {websiteConfig} from "@/request/setting.js";
 import i18n from "@/i18n/index.js";
 
 export async function init() {
-    document.title = '\u200B'
+    document.title = 'Yukino Mail'
 
     const settingStore = useSettingStore();
     const userStore = useUserStore();
@@ -22,6 +22,7 @@ export async function init() {
     }
 
     i18n.global.locale.value = settingStore.lang
+    document.documentElement.lang = settingStore.lang === 'zh' ? 'zh-CN' : 'en'
 
     let setting = null;
 
@@ -35,7 +36,7 @@ export async function init() {
         setting = s;
         settingStore.settings = setting;
         settingStore.domainList = setting.domainList;
-        document.title = setting.title;
+        document.title = 'Yukino Mail';
 
         if (user) {
             accountStore.currentAccountId = user.account.accountId;
@@ -52,6 +53,6 @@ export async function init() {
         setting = await websiteConfig();
         settingStore.settings = setting;
         settingStore.domainList = setting.domainList;
-        document.title = setting.title;
+        document.title = 'Yukino Mail';
     }
 }

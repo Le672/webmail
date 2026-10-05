@@ -1,0 +1,223 @@
+/* Shared visual language with yukino.bond; mailbox dimensions stay compatible
+   with the virtual mail list and the existing mobile drawers. */
+:root {
+  --yukino-paper: #f8f9f5;
+  --yukino-surface: #fffefb;
+  --yukino-sage: #edf0e5;
+  --yukino-sage-deep: #e2e9d8;
+  --yukino-ink: #293b34;
+  --yukino-ink-soft: #646f5e;
+  --yukino-ink-faint: #74806c;
+  --yukino-line: #dfe4d8;
+  --yukino-accent: #294c3b;
+  --yukino-hill: #aabd95;
+  --yukino-serif: Georgia, "Noto Serif SC", "Songti SC", SimSun, serif;
+}
+
+html.dark {
+  --yukino-paper: #18251f;
+  --yukino-surface: #1e2d25;
+  --yukino-sage: #25372b;
+  --yukino-sage-deep: #314735;
+  --yukino-ink: #e6ecdf;
+  --yukino-ink-soft: #b4c1ab;
+  --yukino-ink-faint: #a1b196;
+  --yukino-line: #3c4d3e;
+  --yukino-accent: #91b583;
+  --yukino-hill: #4f6b49;
+}
+
+html:not(.dark), html.dark {
+  --el-color-primary: var(--yukino-accent);
+  --el-color-primary-dark-2: #203e2f;
+  --el-color-primary-light-3: #5d7b5b;
+  --el-color-primary-light-5: #91a881;
+  --el-color-primary-light-7: #c9d6b9;
+  --el-color-primary-light-8: var(--yukino-sage-deep);
+  --el-color-primary-light-9: var(--yukino-sage);
+  --el-bg-color: var(--yukino-surface);
+  --el-bg-color-page: var(--yukino-paper);
+  --el-bg-color-overlay: var(--yukino-surface);
+  --el-text-color-primary: var(--yukino-ink);
+  --el-text-color-regular: var(--yukino-ink-soft);
+  --el-text-color-secondary: var(--yukino-ink-faint);
+  --el-text-color-placeholder: var(--yukino-ink-faint);
+  --el-border-color: var(--yukino-line);
+  --el-border-color-light: var(--yukino-line);
+  --el-border-color-lighter: var(--yukino-line);
+  --el-fill-color: var(--yukino-sage-deep);
+  --el-fill-color-light: var(--yukino-sage);
+  --el-fill-color-lighter: var(--yukino-paper);
+  --el-fill-color-extra-light: var(--yukino-paper);
+  --el-fill-color-blank: var(--yukino-surface);
+  --el-mask-color: var(--loadding-background);
+  --el-border-radius-base: 7px;
+  --el-box-shadow-light: 0 3px 16px #263c2908;
+  --extra-light-fill: var(--yukino-paper);
+  --light-ill: var(--yukino-sage);
+  --light-border: var(--yukino-line);
+  --aside-backgound: var(--yukino-sage);
+  --aside-right-border: 1px 0 0 var(--yukino-line);
+  --dark-border: var(--yukino-line);
+  --base-fill: var(--yukino-sage);
+  --regular-text-color: var(--yukino-ink-soft);
+  --light-border-color: var(--yukino-line);
+  --choose-account-background: var(--yukino-sage-deep);
+  --email-scroll-content-color: var(--yukino-ink-faint);
+  --email-hover-background: var(--yukino-sage);
+  --login-border: var(--yukino-line);
+  --form-desc-color: var(--yukino-ink-soft);
+  --login-switch-color: var(--yukino-accent);
+  --base-border-color: var(--yukino-line);
+  --secondary-text-color: var(--yukino-ink-faint);
+  --scrollbar-track-color: var(--yukino-ink-faint);
+}
+
+html.dark {
+  --el-color-primary-dark-2: #a9c89b;
+  --el-color-primary-light-3: #7c9e70;
+  --el-color-primary-light-5: #627f58;
+  --el-color-primary-light-7: #435c3d;
+  --el-border-color: var(--yukino-line) !important;
+  --loadding-background: rgb(24 37 31 / 85%);
+}
+
+html, body {
+  background: var(--yukino-paper);
+  color: var(--yukino-ink);
+  font-family: "Segoe UI", "Microsoft YaHei UI", "PingFang SC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--yukino-sage-deep); color: var(--yukino-ink); }
+:focus-visible { outline: 2px solid var(--yukino-accent) !important; outline-offset: 3px; }
+.brand-dot { color: #829a66; }
+.mail-eyebrow { color: var(--yukino-ink-faint); font-size: 10px; font-weight: 600; letter-spacing: 1.8px; }
+.mail-brand { display: flex; align-items: center; gap: 12px; width: fit-content; color: var(--yukino-ink); }
+.mail-brand img { flex: none; border-radius: 50%; width: 38px; height: 38px; object-fit: cover; }
+.mail-brand > span { font-family: var(--yukino-serif); font-size: 29px; font-weight: 600; letter-spacing: -1px; line-height: 1.1; }
+.mail-brand small { display: block; margin-top: 6px; color: var(--yukino-ink-soft); font: 9px "Segoe UI", sans-serif; letter-spacing: 3px; }
+.mail-home-link { display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: var(--yukino-ink-soft); font-size: 12px; white-space: nowrap; }
+.mail-home-link:hover { color: var(--yukino-accent); }
+
+.layout .main-container { background: var(--yukino-paper); min-width: 0; }
+.layout .el-main { min-width: 0; }
+.layout .el-header { background: var(--yukino-paper); }
+.layout .main-view, .layout .email-container { min-width: 0; background: var(--yukino-surface); }
+.layout .mail-sidebar { display: flex; flex-direction: column; min-height: 100dvh; padding: 25px 0 0; width: 240px; background: var(--yukino-sage); }
+.mail-sidebar .mail-brand { margin: 0 24px; }
+.mail-sidebar-caption { margin: 26px 24px 6px; color: var(--yukino-ink-faint); font-size: 8px; letter-spacing: 1.4px; }
+.layout .mail-sidebar .el-menu { width: 240px; background: transparent; padding-bottom: 22px; }
+.layout .mail-sidebar .el-menu-item { height: 38px; margin: 5px 14px !important; padding: 10px 12px !important; background: transparent; color: var(--yukino-ink-soft); border-radius: 7px; font-size: 13px; }
+.layout .mail-sidebar .el-menu-item.choose-item { color: var(--yukino-ink); background: var(--yukino-sage-deep) !important; font-weight: 600; }
+.layout .mail-sidebar .el-menu-item:hover { background: var(--yukino-sage-deep) !important; color: var(--yukino-ink); }
+.layout .mail-sidebar .menu-name { margin-left: 13px !important; }
+.layout .mail-sidebar .manage-title { margin: 22px 24px 10px; padding: 16px 0 0; border-top: 1px solid var(--yukino-line); color: var(--yukino-ink-faint); font-size: 11px; }
+.mail-sidebar-footer { display: grid; gap: 12px; margin: auto 24px 0; padding: 20px 0 24px; border-top: 1px solid var(--yukino-line); font-size: 11px; }
+.mail-sidebar-footer a { display: flex; align-items: center; justify-content: space-between; color: var(--yukino-ink); }
+.mail-sidebar-footer > span { color: var(--yukino-ink-soft); font-family: var(--yukino-serif); }
+.layout .header { padding-right: 10px; }
+.layout .breadcrumb-item { font-family: var(--yukino-serif); font-size: 22px; font-weight: 500; }
+.layout .header .writer-box { gap: 8px; padding: 7px 12px; margin: auto 0 auto 10px; border: 1px solid var(--yukino-accent); border-radius: 7px; background: var(--yukino-accent); color: #fffef5; }
+.layout .header .writer-box:hover { opacity: .88; }
+.layout .writer-box .writer { width: 20px; height: 20px; background: transparent; border-radius: 0; color: inherit; }
+.compose-label { font-size: 12px; }
+.layout .toolbar { gap: 12px; }
+.layout .toolbar .icon-item { color: var(--yukino-ink-soft); border-radius: 7px; }
+.layout .toolbar .avatar-text { background: var(--yukino-sage); border-color: var(--yukino-line); color: var(--yukino-accent); border-radius: 50%; font-family: var(--yukino-serif); }
+.layout .account-box { background: var(--yukino-paper); }
+.layout .account-box .item { border: 1px solid var(--yukino-line); box-shadow: none; background: var(--yukino-surface); }
+.layout .account-box .item.choose { border-color: #a9ba99; }
+.layout .header-actions { background: var(--yukino-paper); color: var(--yukino-ink-soft); }
+.layout .email-row { color: var(--yukino-ink); }
+.layout .email-container .noLoading, .layout .account-box .noLoading { font-size: 12px; }
+.layout .email-row .email-content { color: var(--yukino-ink-faint); }
+.el-dialog, .el-message-box, .el-notification { border: 1px solid var(--yukino-line); border-radius: 12px; }
+.el-dialog__title, .el-message-box__title { font-family: var(--yukino-serif); }
+.el-card { --el-card-bg-color: var(--yukino-surface); --el-card-border-color: var(--yukino-line); }
+.el-table { --el-table-header-bg-color: var(--yukino-paper); --el-table-row-hover-bg-color: var(--yukino-sage); }
+.el-button--primary { --el-button-text-color: #fffef5; --el-button-hover-text-color: #fffef5; }
+html.dark .el-button--primary, html.dark .layout .header .writer-box { color: #18251f; --el-button-text-color: #18251f; --el-button-hover-text-color: #18251f; }
+#nprogress .bar { background: var(--yukino-accent); }
+#nprogress .peg { box-shadow: 0 0 10px var(--yukino-accent), 0 0 5px var(--yukino-accent); }
+
+/* An editorial login page, using the main site's garden illustration shapes. */
+#login-box {
+  min-height: 100dvh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+  background: radial-gradient(ellipse at 0 0, var(--yukino-sage), transparent 55%), var(--yukino-paper);
+  font: inherit;
+}
+.mail-login-header { display: flex; justify-content: space-between; align-items: center; gap: 20px; width: min(1184px, 100%); margin: 0 auto; padding: 24px 32px; border-bottom: 1px solid var(--yukino-line); }
+.mail-login-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 90px; align-items: center; flex: 1; width: min(1184px, 100%); padding: 52px 32px; margin: 0 auto; }
+.mail-intro { min-width: 0; }
+.mail-intro > .mail-eyebrow { display: flex; align-items: center; gap: 9px; font-size: 9px; }
+.mail-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #749457; box-shadow: 0 0 0 4px var(--yukino-sage-deep); }
+.mail-intro h1 { margin-top: 24px; font-family: var(--yukino-serif); font-size: 26px; font-weight: 400; line-height: 1.5; }
+.mail-intro h1 > span { display: block; margin: 5px 0 16px; font-family: Georgia, serif; font-size: clamp(38px, 4.5vw, 64px); line-height: 1.15; letter-spacing: -2.5px; }
+.mail-intro-tagline { font-family: var(--yukino-serif); font-size: 22px; letter-spacing: 2px; }
+.mail-intro-description { max-width: 390px; margin-top: 12px; font-size: 13px; line-height: 2; color: var(--yukino-ink-soft); }
+.mail-postcard { position: relative; height: 235px; margin-top: 30px; overflow: hidden; isolation: isolate; border: 1px solid var(--yukino-line); border-radius: 90px 90px 9px 9px; background: var(--yukino-sage-deep); }
+.postcard-caption { position: absolute; top: 25px; left: 40px; z-index: 2; font-size: 8px; letter-spacing: 1.6px; color: var(--yukino-ink-soft); }
+.postcard-orbit { position: absolute; width: 300px; height: 300px; top: 45px; left: 14%; border: 1px solid #9aae8040; border-radius: 50%; }
+.postcard-sun { position: absolute; width: 70px; height: 70px; top: 48px; right: 55px; background: #fbfbed; border-radius: 50%; }
+.postcard-hill { position: absolute; width: 600px; height: 225px; top: 158px; left: -150px; border-radius: 50%; background: #ced9ba; transform: rotate(-16deg); }
+.postcard-hill-front { top: 186px; left: 50px; background: var(--yukino-hill); transform: rotate(-24deg); }
+.postcard-envelope { position: absolute; display: grid; place-items: center; top: 65px; left: 40px; width: 150px; height: 105px; border: 1px solid #a3b395; border-radius: 8px; background: var(--yukino-paper); color: var(--yukino-accent); transform: rotate(-8deg); }
+.postcard-envelope > svg { width: 68px; height: 68px; stroke-width: 1; }
+.postcard-note { position: absolute; bottom: 58px; right: 35px; max-width: 170px; z-index: 2; font-family: var(--yukino-serif); font-size: 14px; letter-spacing: 1px; }
+.postcard-bottom { position: absolute; bottom: 18px; left: 35px; z-index: 2; font-size: 8px; letter-spacing: 1.6px; }
+.has-custom-background > .postcard-hill, .has-custom-background > .postcard-orbit, .has-custom-background > .postcard-sun { display: none; }
+.has-custom-background > .postcard-caption, .has-custom-background > .postcard-note, .has-custom-background > .postcard-bottom { padding: 4px 7px; border-radius: 4px; background: var(--yukino-paper); color: var(--yukino-ink); }
+html.dark .postcard-sun { background: #b0bc90; }
+html.dark .postcard-hill-back { background: #3b5437; }
+#login-box .form-wrapper { position: static; display: block; height: auto; width: 100%; z-index: 1; }
+#login-box .form-wrapper > .container { width: 100%; height: auto; margin: 0; padding: 38px; border: 1px solid var(--yukino-line); border-radius: 12px; background: var(--yukino-surface); box-shadow: 0 12px 42px #263c2906; }
+.login-form-title { margin-top: 14px; font-family: var(--yukino-serif); font-size: 27px; font-weight: 500; line-height: 1.6; }
+.login-form-subtitle { display: inline-block; margin-left: 5px; color: var(--yukino-ink-faint); font-family: Georgia, serif; font-size: 16px; font-style: italic; font-weight: 400; }
+#login-box .form-wrapper .form-desc { margin: 8px 0 28px; font-size: 13px; line-height: 1.8; }
+#login-box .form-wrapper .el-input { height: 44px; margin-bottom: 18px; }
+#login-box .form-wrapper .el-input__inner { height: 42px; }
+#login-box .form-wrapper .btn { height: 44px; font-size: 14px; }
+#login-box .form-wrapper .switch { margin-top: 25px; padding-top: 22px; border-top: 1px solid var(--yukino-line); color: var(--yukino-ink-soft); font-size: 12px; }
+#login-box .switch button { color: var(--yukino-accent); cursor: pointer; margin-left: 4px; }
+.mail-login-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px 24px; width: min(1184px, 100%); margin: auto auto 0; padding: 22px 32px; border-top: 1px solid var(--yukino-line); color: var(--yukino-ink-soft); font-size: 11px; }
+.mail-login-footer > span:nth-child(2) { font-family: var(--yukino-serif); letter-spacing: 1px; }
+.mail-login-footer a { display: inline-flex; align-items: center; gap: 7px; }
+
+@media (max-width: 1024px) {
+  .mail-login-layout { gap: 35px; padding: 45px 28px; }
+  #login-box .form-wrapper > .container { padding: 28px; }
+  .mail-intro h1 > span { font-size: 43px; }
+  .postcard-envelope { left: 25px; width: 120px; }
+  .postcard-note { right: 20px; font-size: 12px; max-width: 145px; }
+}
+
+@media (max-width: 767px) {
+  .mail-login-header { padding: 20px; }
+  .mail-login-header .mail-brand > span { font-size: 26px; }
+  .mail-login-layout { grid-template-columns: 1fr; gap: 28px; padding: 32px 20px; }
+  .mail-intro h1 { font-size: 20px; margin-top: 20px; }
+  .mail-intro h1 > span { font-size: clamp(34px, 9vw, 46px); margin-bottom: 12px; }
+  .mail-intro-tagline { font-size: 18px; }
+  .mail-intro-description { font-size: 12px; }
+  .mail-postcard { display: none; }
+  #login-box .form-wrapper > .container { padding: 26px 22px; }
+  .mail-login-footer { padding: 20px; font-size: 10px; }
+  .mail-login-footer > span:nth-child(2) { display: none; }
+  .layout .breadcrumb-item { font-size: 20px; }
+  .layout .header { gap: 5px; padding-right: 0; }
+  .layout .header .writer-box { margin-left: 2px; padding: 6px 9px; }
+  .compose-label, .layout .toolbar .mail-home-link { display: none; }
+  .layout .toolbar { gap: 5px; }
+  .layout .toolbar .avatar .setting-icon { margin-right: 4px; }
+  .el-message { max-width: calc(100vw - 28px); white-space: normal !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

@@ -1,5 +1,14 @@
 import {addCollection} from "@iconify/vue";
 addCollection({
+    prefix: 'lucide',
+    width: 24,
+    height: 24,
+    icons: {
+        'arrow-up-right': { body: '<g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></g>' },
+        mail: { body: '<g fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></g>' },
+    },
+});
+addCollection({
     "prefix": "hugeicons",
     "lastModified": 1757879391,
     "aliases": {},
@@ -706,4 +715,3 @@ addCollection({
         }
     }
 })
-

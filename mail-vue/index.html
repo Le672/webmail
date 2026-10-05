@@ -1,13 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#F1F1F1" id="theme-color-meta">
-  <meta name="description" content="Cloud Mail 是一个 Serverless 响应式邮箱服务，支持邮件发送，可部署到 Cloudflare 平台，降低服务器成本。Cloud Mail is a serverless responsive email service that supports email sending and can be deployed on Cloudflare to reduce server costs.">
-  <title>Cloud Mail</title>
-  <link rel="icon" href="/public/mail.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#f8f9f5" id="theme-color-meta">
+  <meta name="description" content="Yukino Mail — 写封邮件，保持联络。数字花园里，专属于你的信箱。A little space for your letters.">
+  <title>Yukino Mail</title>
+  <link rel="icon" href="/yukino-avatar.jpg" type="image/jpeg">
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script>
     const uiStoreStr =  localStorage.getItem('ui')
@@ -16,17 +15,16 @@
       const root = document.documentElement
       root.setAttribute('class', uiStore.dark ? 'dark' : '');
       const metaTag = document.getElementById('theme-color-meta');
-      const isMobile =  !window.matchMedia("(pointer: fine) and (hover: hover)").matches;
-      metaTag.setAttribute('content', uiStore.dark ? (isMobile ? '#141414' : '#000000') : (isMobile ? '#FFFFFF' : '#F1F1F1'));
+      metaTag.setAttribute('content', uiStore.dark ? '#18251f' : '#f8f9f5');
     }
   </script>
 </head>
 <style>
   html {
-    background: #FFFFFF;
+    background: #f8f9f5;
   }
   .dark {
-    background: #141414;
+    background: #18251f;
   }
   #loading-first {
     position: fixed;
@@ -57,7 +55,7 @@
   .loading-image {
     width: 70px;
     height: 70px;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .loading-progress {
@@ -66,7 +64,7 @@
     height: 4px;
     overflow: hidden;
     border-radius: 999px;
-    background: rgba(64, 158, 255, 0.18);
+    background: rgba(93, 123, 91, 0.18);
   }
 
   .loading-progress::before {
@@ -77,7 +75,7 @@
     width: 100%;
     height: 100%;
     border-radius: inherit;
-    background: #409EFF;
+    background: #5d7b5b;
     transform: scaleX(0);
     transform-origin: left center;
     animation: loading-progress-grow 2.4s linear forwards;
@@ -90,7 +88,7 @@
     width: 24px;
     height: 100%;
     border-radius: inherit;
-    background: rgba(64, 158, 255, 0.45);
+    background: rgba(93, 123, 91, 0.45);
     filter: blur(4px);
     transform: translateX(-24px);
     animation: loading-progress-peg 2.4s linear forwards;
@@ -129,7 +127,7 @@
 <body>
 <div id="loading-first" >
   <div class="loading-icon">
-    <img class="loading-image" src="/mail-pwa.png" alt="Cloud Mail">
+    <img class="loading-image" src="/yukino-avatar.jpg" alt="Yukino Mail" style="border-radius: 50%">
     <div class="loading-progress" aria-hidden="true"></div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import NProgress from 'nprogress';
 import {useUiStore} from "@/store/ui.js";
 import {useSettingStore} from "@/store/setting.js";
 import {cvtR2Url} from "@/utils/convert.js";
+import i18n from "@/i18n/index.js";
 
 const routes = [
     {
@@ -149,6 +150,7 @@ function loadBackground(next) {
 }
 
 router.afterEach((to) => {
+    document.title = to.meta.title ? `${i18n.global.t(to.meta.title)} | Yukino Mail` : 'Yukino Mail'
 
     clearTimeout(timer)
     if (first) {

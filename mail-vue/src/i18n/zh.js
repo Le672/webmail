@@ -336,6 +336,17 @@ const zh = {
     searchUser: '搜索用户',
     searchEmail: '搜索邮箱',
     searchSender: '搜索发件人',
-    userEmail: '用户邮箱'
+    userEmail: '用户邮箱',
+    mailHome: '返回主站',
+    mailQuietNote: '慢慢写，慢慢长。',
+    mailCompose: '写封邮件',
+    mailLightMode: '切换浅色模式',
+    mailDarkMode: '切换深色模式',
+    mailNotice: '查看公告',
+    mailHeroGreeting: '很高兴，在这里遇见你。',
+    mailHeroTagline: '写封邮件，保持联络。',
+    mailHeroDescription: '收好每一封来信，留下值得记住的对话。这是数字花园里，专属于你的信箱。',
+    mailPostcardNote: '把想说的话，慢慢写成信。',
+    mailChangelog: '小站的变化'
 }
 export default zh

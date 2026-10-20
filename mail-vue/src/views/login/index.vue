@@ -14,9 +14,8 @@
         <p class="mail-intro-tagline">{{ $t('mailHeroTagline') }}</p>
         <p class="mail-intro-description">{{ $t('mailHeroDescription') }}</p>
         <div class="mail-postcard" :class="{'has-custom-background': Boolean(background)}" :style="background" aria-hidden="true">
-          <span class="postcard-caption">YUKINO / PERSONAL MAIL</span>
-          <div class="postcard-orbit"></div><div class="postcard-sun"></div>
-          <div class="postcard-hill postcard-hill-back"></div><div class="postcard-hill postcard-hill-front"></div>
+          <span class="postcard-caption">FROM THE WRITING DESK</span>
+          <div class="postcard-paper postcard-paper-back"></div><div class="postcard-paper postcard-paper-front"><span>Dear you,</span><i></i><i></i><i></i><i></i></div>
           <div class="postcard-envelope"><Icon icon="lucide:mail" width="100" height="100" /></div>
           <span class="postcard-note">{{ $t('mailPostcardNote') }}</span>
           <span class="postcard-bottom">WRITE · SEND · CONNECT</span>

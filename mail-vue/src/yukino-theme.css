@@ -1,38 +1,38 @@
 /* Shared visual language with yukino.bond; mailbox dimensions stay compatible
    with the virtual mail list and the existing mobile drawers. */
 :root {
-  --yukino-paper: #f8f9f5;
-  --yukino-surface: #fffefb;
-  --yukino-sage: #edf0e5;
-  --yukino-sage-deep: #e2e9d8;
-  --yukino-ink: #293b34;
-  --yukino-ink-soft: #646f5e;
-  --yukino-ink-faint: #74806c;
-  --yukino-line: #dfe4d8;
-  --yukino-accent: #294c3b;
-  --yukino-hill: #aabd95;
+  --yukino-paper: #f8fafc;
+  --yukino-surface: #ffffff;
+  --yukino-sage: #edf4fa;
+  --yukino-sage-deep: #e0ebf6;
+  --yukino-ink: #34465c;
+  --yukino-ink-soft: #64758a;
+  --yukino-ink-faint: #64758a;
+  --yukino-line: #e5ebf1;
+  --yukino-accent: #4f759d;
+  --yukino-hill: #c6d9eb;
   --yukino-serif: Georgia, "Noto Serif SC", "Songti SC", SimSun, serif;
 }
 
 html.dark {
-  --yukino-paper: #18251f;
-  --yukino-surface: #1e2d25;
-  --yukino-sage: #25372b;
-  --yukino-sage-deep: #314735;
-  --yukino-ink: #e6ecdf;
-  --yukino-ink-soft: #b4c1ab;
-  --yukino-ink-faint: #a1b196;
-  --yukino-line: #3c4d3e;
-  --yukino-accent: #91b583;
-  --yukino-hill: #4f6b49;
+  --yukino-paper: #181f29;
+  --yukino-surface: #202a36;
+  --yukino-sage: #283849;
+  --yukino-sage-deep: #334252;
+  --yukino-ink: #dce6f1;
+  --yukino-ink-soft: #afbed0;
+  --yukino-ink-faint: #9baec2;
+  --yukino-line: #334252;
+  --yukino-accent: #9abddd;
+  --yukino-hill: #526a8a;
 }
 
 html:not(.dark), html.dark {
   --el-color-primary: var(--yukino-accent);
-  --el-color-primary-dark-2: #203e2f;
-  --el-color-primary-light-3: #5d7b5b;
-  --el-color-primary-light-5: #91a881;
-  --el-color-primary-light-7: #c9d6b9;
+  --el-color-primary-dark-2: #416a93;
+  --el-color-primary-light-3: #7a9bbb;
+  --el-color-primary-light-5: #9eb9d4;
+  --el-color-primary-light-7: #cbddeb;
   --el-color-primary-light-8: var(--yukino-sage-deep);
   --el-color-primary-light-9: var(--yukino-sage);
   --el-bg-color: var(--yukino-surface);
@@ -52,7 +52,7 @@ html:not(.dark), html.dark {
   --el-fill-color-blank: var(--yukino-surface);
   --el-mask-color: var(--loadding-background);
   --el-border-radius-base: 7px;
-  --el-box-shadow-light: 0 3px 16px #263c2908;
+  --el-box-shadow-light: 0 3px 16px #34465c08;
   --extra-light-fill: var(--yukino-paper);
   --light-ill: var(--yukino-sage);
   --light-border: var(--yukino-line);
@@ -74,12 +74,12 @@ html:not(.dark), html.dark {
 }
 
 html.dark {
-  --el-color-primary-dark-2: #a9c89b;
-  --el-color-primary-light-3: #7c9e70;
-  --el-color-primary-light-5: #627f58;
-  --el-color-primary-light-7: #435c3d;
+  --el-color-primary-dark-2: #b4cee8;
+  --el-color-primary-light-3: #82a5c9;
+  --el-color-primary-light-5: #6284a6;
+  --el-color-primary-light-7: #3c5573;
   --el-border-color: var(--yukino-line) !important;
-  --loadding-background: rgb(24 37 31 / 85%);
+  --loadding-background: rgb(24 31 41 / 85%);
 }
 
 html, body {
@@ -92,7 +92,7 @@ html, body {
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--yukino-sage-deep); color: var(--yukino-ink); }
 :focus-visible { outline: 2px solid var(--yukino-accent) !important; outline-offset: 3px; }
-.brand-dot { color: #829a66; }
+.brand-dot { color: #c78198; }
 .mail-eyebrow { color: var(--yukino-ink-faint); font-size: 10px; font-weight: 600; letter-spacing: 1.8px; }
 .mail-brand { display: flex; align-items: center; gap: 12px; width: fit-content; color: var(--yukino-ink); }
 .mail-brand img { flex: none; border-radius: 50%; width: 38px; height: 38px; object-fit: cover; }
@@ -105,7 +105,7 @@ a { color: inherit; text-decoration: none; }
 .layout .el-main { min-width: 0; }
 .layout .el-header { background: var(--yukino-paper); }
 .layout .main-view, .layout .email-container { min-width: 0; background: var(--yukino-surface); }
-.layout .mail-sidebar { display: flex; flex-direction: column; min-height: 100dvh; padding: 25px 0 0; width: 240px; background: var(--yukino-sage); }
+.layout .mail-sidebar { display: flex; flex-direction: column; min-height: 100dvh; padding: 25px 0 0; width: 240px; background: var(--yukino-surface); }
 .mail-sidebar .mail-brand { margin: 0 24px; }
 .mail-sidebar-caption { margin: 26px 24px 6px; color: var(--yukino-ink-faint); font-size: 8px; letter-spacing: 1.4px; }
 .layout .mail-sidebar .el-menu { width: 240px; background: transparent; padding-bottom: 22px; }
@@ -119,7 +119,7 @@ a { color: inherit; text-decoration: none; }
 .mail-sidebar-footer > span { color: var(--yukino-ink-soft); font-family: var(--yukino-serif); }
 .layout .header { padding-right: 10px; }
 .layout .breadcrumb-item { font-family: var(--yukino-serif); font-size: 22px; font-weight: 500; }
-.layout .header .writer-box { gap: 8px; padding: 7px 12px; margin: auto 0 auto 10px; border: 1px solid var(--yukino-accent); border-radius: 7px; background: var(--yukino-accent); color: #fffef5; }
+.layout .header .writer-box { gap: 8px; padding: 7px 12px; margin: auto 0 auto 10px; border: 1px solid var(--yukino-accent); border-radius: 7px; background: var(--yukino-accent); color: #ffffff; }
 .layout .header .writer-box:hover { opacity: .88; }
 .layout .writer-box .writer { width: 20px; height: 20px; background: transparent; border-radius: 0; color: inherit; }
 .compose-label { font-size: 12px; }
@@ -128,7 +128,7 @@ a { color: inherit; text-decoration: none; }
 .layout .toolbar .avatar-text { background: var(--yukino-sage); border-color: var(--yukino-line); color: var(--yukino-accent); border-radius: 50%; font-family: var(--yukino-serif); }
 .layout .account-box { background: var(--yukino-paper); }
 .layout .account-box .item { border: 1px solid var(--yukino-line); box-shadow: none; background: var(--yukino-surface); }
-.layout .account-box .item.choose { border-color: #a9ba99; }
+.layout .account-box .item.choose { border-color: #b3c8df; }
 .layout .header-actions { background: var(--yukino-paper); color: var(--yukino-ink-soft); }
 .layout .email-row { color: var(--yukino-ink); }
 .layout .email-container .noLoading, .layout .account-box .noLoading { font-size: 12px; }
@@ -137,19 +137,19 @@ a { color: inherit; text-decoration: none; }
 .el-dialog__title, .el-message-box__title { font-family: var(--yukino-serif); }
 .el-card { --el-card-bg-color: var(--yukino-surface); --el-card-border-color: var(--yukino-line); }
 .el-table { --el-table-header-bg-color: var(--yukino-paper); --el-table-row-hover-bg-color: var(--yukino-sage); }
-.el-button--primary { --el-button-text-color: #fffef5; --el-button-hover-text-color: #fffef5; }
-html.dark .el-button--primary, html.dark .layout .header .writer-box { color: #18251f; --el-button-text-color: #18251f; --el-button-hover-text-color: #18251f; }
+.el-button--primary { --el-button-text-color: #ffffff; --el-button-hover-text-color: #ffffff; }
+html.dark .el-button--primary, html.dark .layout .header .writer-box { color: #181f29; --el-button-text-color: #181f29; --el-button-hover-text-color: #181f29; }
 #nprogress .bar { background: var(--yukino-accent); }
 #nprogress .peg { box-shadow: 0 0 10px var(--yukino-accent), 0 0 5px var(--yukino-accent); }
 
-/* An editorial login page, using the main site's garden illustration shapes. */
+/* A writing desk welcome, aligned with the Novel and Cinema collection. */
 #login-box {
   min-height: 100dvh;
   height: auto;
   display: flex;
   flex-direction: column;
   overflow-x: clip;
-  background: radial-gradient(ellipse at 0 0, var(--yukino-sage), transparent 55%), var(--yukino-paper);
+  background: var(--yukino-paper);
   font: inherit;
 }
 .mail-login-header { display: flex; justify-content: space-between; align-items: center; gap: 20px; width: min(1184px, 100%); margin: 0 auto; padding: 24px 32px; border-bottom: 1px solid var(--yukino-line); }
@@ -167,16 +167,16 @@ html.dark .el-button--primary, html.dark .layout .header .writer-box { color: #1
 .postcard-sun { position: absolute; width: 70px; height: 70px; top: 48px; right: 55px; background: #fbfbed; border-radius: 50%; }
 .postcard-hill { position: absolute; width: 600px; height: 225px; top: 158px; left: -150px; border-radius: 50%; background: #ced9ba; transform: rotate(-16deg); }
 .postcard-hill-front { top: 186px; left: 50px; background: var(--yukino-hill); transform: rotate(-24deg); }
-.postcard-envelope { position: absolute; display: grid; place-items: center; top: 65px; left: 40px; width: 150px; height: 105px; border: 1px solid #a3b395; border-radius: 8px; background: var(--yukino-paper); color: var(--yukino-accent); transform: rotate(-8deg); }
+.postcard-envelope { position: absolute; display: grid; place-items: center; top: 65px; left: 40px; width: 150px; height: 105px; border: 1px solid #b8c9dc; border-radius: 8px; background: var(--yukino-paper); color: var(--yukino-accent); transform: rotate(-8deg); }
 .postcard-envelope > svg { width: 68px; height: 68px; stroke-width: 1; }
 .postcard-note { position: absolute; bottom: 58px; right: 35px; max-width: 170px; z-index: 2; font-family: var(--yukino-serif); font-size: 14px; letter-spacing: 1px; }
 .postcard-bottom { position: absolute; bottom: 18px; left: 35px; z-index: 2; font-size: 8px; letter-spacing: 1.6px; }
 .has-custom-background > .postcard-hill, .has-custom-background > .postcard-orbit, .has-custom-background > .postcard-sun { display: none; }
 .has-custom-background > .postcard-caption, .has-custom-background > .postcard-note, .has-custom-background > .postcard-bottom { padding: 4px 7px; border-radius: 4px; background: var(--yukino-paper); color: var(--yukino-ink); }
-html.dark .postcard-sun { background: #b0bc90; }
-html.dark .postcard-hill-back { background: #3b5437; }
+html.dark .postcard-sun { background: #b4cbe2; }
+html.dark .postcard-hill-back { background: #334d6e; }
 #login-box .form-wrapper { position: static; display: block; height: auto; width: 100%; z-index: 1; }
-#login-box .form-wrapper > .container { width: 100%; height: auto; margin: 0; padding: 38px; border: 1px solid var(--yukino-line); border-radius: 12px; background: var(--yukino-surface); box-shadow: 0 12px 42px #263c2906; }
+#login-box .form-wrapper > .container { width: 100%; height: auto; margin: 0; padding: 38px; border: 1px solid var(--yukino-line); border-radius: 12px; background: var(--yukino-surface); box-shadow: 0 12px 42px #34465c04; }
 .login-form-title { margin-top: 14px; font-family: var(--yukino-serif); font-size: 27px; font-weight: 500; line-height: 1.6; }
 .login-form-subtitle { display: inline-block; margin-left: 5px; color: var(--yukino-ink-faint); font-family: Georgia, serif; font-size: 16px; font-style: italic; font-weight: 400; }
 #login-box .form-wrapper .form-desc { margin: 8px 0 28px; font-size: 13px; line-height: 1.8; }
@@ -221,3 +221,20 @@ html.dark .postcard-hill-back { background: #3b5437; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* Quiet white sidebar and writing-desk illustration shared with the collection sites. */
+.layout .mail-sidebar { background: var(--yukino-surface); border-right: 1px solid var(--yukino-line); }
+.layout .el-header, .mail-login-header { background: var(--yukino-surface); border-bottom: 1px solid var(--yukino-line); }
+.mail-postcard { background: linear-gradient(115deg, #edf5fc, #f4f5fa 58%, #f9edf1); border-color: var(--yukino-line); border-radius: 14px; }
+.postcard-paper { position: absolute; width: 155px; height: 175px; border: 1px solid #d7e2ee; background: #ffffff; box-shadow: 0 8px 20px #5b82a916; }
+.postcard-paper-back { top: 54px; left: 95px; transform: rotate(-11deg); background: #e7eff9; }
+.postcard-paper-front { top: 49px; left: 135px; transform: rotate(8deg); padding: 22px 20px; background: #fff7fa; border-color: #ead5df; }
+.postcard-paper-front span { display: block; margin-bottom: 23px; font: italic 20px Georgia,serif; color: #9c6680; }
+.postcard-paper-front i { display: block; height: 1px; background: #e4ceda; margin: 15px 0; }
+.postcard-paper-front i:last-child { width: 65%; }
+.postcard-envelope { top: 125px; left: 47px; width: 126px; height: 89px; z-index: 2; border-color: #c3d4e7; background: #edf4fa; }
+.has-custom-background > .postcard-paper { display: none; }
+html.dark .mail-postcard { background: linear-gradient(115deg,#25364b,#30354b 65%,#3b3045); }
+html.dark .postcard-paper-front { background: #3a3041; border-color: #5c4561; }
+html.dark .postcard-paper-back { background: #283b52; border-color: #3f5774; }
+html.dark .postcard-paper-front span { color: #dbadc6; }

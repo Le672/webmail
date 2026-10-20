@@ -229,7 +229,7 @@ function openDark(e) {
 function switchDark(nextIsDark, root) {
   root.setAttribute('class', nextIsDark ? 'dark' : '')
   const metaTag = document.getElementById('theme-color-meta');
-  metaTag.setAttribute('content', nextIsDark ? '#18251f' : '#f8f9f5');
+  metaTag.setAttribute('content', nextIsDark ? '#181f29' : '#f8fafc');
   uiStore.dark = nextIsDark
 }
 

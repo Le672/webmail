@@ -252,6 +252,7 @@ const loginService = {
 
 		await userService.updateUserInfo(c, userRow.userId);
 
+		authInfo.refreshTime = dayjs().toISOString();
 		await c.env.kv.put(KvConst.AUTH_INFO + userRow.userId, JSON.stringify(authInfo), { expirationTtl: constant.TOKEN_EXPIRE });
 		return jwt;
 	},

@@ -3,41 +3,14 @@ import orm from '../entity/orm';
 import email from '../entity/email';
 import { desc, count, eq, and, ne, isNotNull } from 'drizzle-orm';
 import { emailConst } from '../const/entity-const';
-import kvConst from '../const/kv-const';
 import dayjs from 'dayjs';
 import { toUtc } from '../utils/date-uitil';
+import { cachedAnalysis } from './analysis-cache.mjs';
+import { todaySendTotal } from './send-statistics.mjs';
 const analysisService = {
 
 	async echarts(c, params) {
-		if (!this.analysisCacheEnabled(c)) {
-			return await this.queryEcharts(c, params);
-		}
-
-		const cacheKey = this.echartsCacheKey(params);
-		const cache = await c.env.kv.get(cacheKey, { type: 'json' });
-
-		if (cache) {
-			return cache;
-		}
-
-		return await this.refreshEchartsCacheByKey(c, cacheKey);
-	},
-
-	async refreshEchartsCacheByKey(c, cacheKey) {
-		const params = this.echartsParamsByCacheKey(cacheKey);
-		const data = await this.queryEcharts(c, params);
-		await c.env.kv.put(cacheKey, JSON.stringify(data));
-		return data;
-	},
-
-	async refreshEchartsCache(c) {
-		if (!this.analysisCacheEnabled(c)) {
-			return;
-		}
-
-		const { keys } = await c.env.kv.list({ prefix: kvConst.ANALYSIS_ECHARTS });
-
-		await Promise.all(keys.map(key => this.refreshEchartsCacheByKey(c, key.name)));
+		return cachedAnalysis(c, params, normalized => this.queryEcharts(c, normalized));
 	},
 
 	async queryEcharts(c, params) {
@@ -79,7 +52,7 @@ const analysisService = {
 			analysisDao.receiveDayCount(c, diffHours),
 			analysisDao.sendDayCount(c, diffHours),
 
-			c.env.kv.get(kvConst.SEND_DAY_COUNT + dayjs().format('YYYY-MM-DD')),
+			todaySendTotal(c.env.db),
 		]);
 
 
@@ -117,19 +90,6 @@ const analysisService = {
 
 	},
 
-	echartsCacheKey(params = {}) {
-		return kvConst.ANALYSIS_ECHARTS + encodeURIComponent(params.timeZone || 'UTC');
-	},
-
-	echartsParamsByCacheKey(cacheKey) {
-		return {
-			timeZone: decodeURIComponent(cacheKey.replace(kvConst.ANALYSIS_ECHARTS, ''))
-		};
-	},
-
-	analysisCacheEnabled(c) {
-		return c.env.analysis_cache === true || c.env.analysis_cache === 'true';
-	}
 }
 
 export default  analysisService

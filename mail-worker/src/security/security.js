@@ -2,11 +2,11 @@ import BizError from '../error/biz-error';
 import constant from '../const/constant';
 import jwtUtils from '../utils/jwt-utils';
 import KvConst from '../const/kv-const';
-import dayjs from 'dayjs';
 import userService from '../service/user-service';
 import permService from '../service/perm-service';
 import { t } from '../i18n/i18n'
 import app from '../hono/hono';
+import { refreshSession } from './session-refresh.mjs';
 
 const exclude = [
 	'/login',
@@ -151,14 +151,7 @@ app.use('*', async (c, next) => {
 
 	}
 
-	const refreshTime = dayjs(authInfo.refreshTime).startOf('day');
-	const nowTime = dayjs().startOf('day')
-
-	if (!nowTime.isSame(refreshTime)) {
-		authInfo.refreshTime = dayjs().toISOString();
-		await userService.updateUserInfo(c, authInfo.user.userId);
-		await c.env.kv.put(KvConst.AUTH_INFO + userId, JSON.stringify(authInfo), { expirationTtl: constant.TOKEN_EXPIRE });
-	}
+	await refreshSession(c, authInfo, (ctx, id) => userService.updateUserInfo(ctx, id));
 
 	c.set('user',authInfo.user)
 

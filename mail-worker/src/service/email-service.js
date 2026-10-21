@@ -15,8 +15,6 @@ import userService from './user-service';
 import roleService from './role-service';
 import user from '../entity/user';
 import starService from './star-service';
-import dayjs from 'dayjs';
-import kvConst from '../const/kv-const';
 import { t } from '../i18n/i18n'
 import domainUtils from '../utils/domain-uitls';
 import account from "../entity/account";
@@ -359,17 +357,6 @@ const emailService = {
 		//如果全是站内接收方，直接写入数据库
 		if (allInternal) {
 			await this.HandleOnSiteEmail(c, receiveEmail, emailResult, attList);
-		}
-
-		const dateStr = dayjs().format('YYYY-MM-DD');
-		let daySendTotal = await c.env.kv.get(kvConst.SEND_DAY_COUNT + dateStr);
-
-		//记录每天发件次数统计
-		if (!daySendTotal) {
-			await c.env.kv.put(kvConst.SEND_DAY_COUNT + dateStr, JSON.stringify(receiveEmail.length), { expirationTtl: 60 * 60 * 24 });
-		} else  {
-			daySendTotal = Number(daySendTotal) + receiveEmail.length
-			await c.env.kv.put(kvConst.SEND_DAY_COUNT + dateStr, JSON.stringify(daySendTotal), { expirationTtl: 60 * 60 * 24 });
 		}
 
 		return [ emailResult ];
